@@ -84,6 +84,8 @@ public class DBHelper extends SQLiteOpenHelper {
             UserModel userModel = new UserModel();
             userModel.setId((int) cursor.getLong(0));
             userModel.setFullName(cursor.getString(1));
+            userModel.setNickName(cursor.getString(2));
+
 //            userModel.setLastName(cursor.getString(2));
 //            friend.setEmail(cursor.getString(3));
 //            friend.setDescription(cursor.getString(4));
@@ -109,6 +111,8 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 //        values.put(User.Column.ID, friend.getId());
         values.put(User.Column.FULL_NAME, user.getFullName());
+        values.put(User.Column.NICK_NAME, user.getNickName());
+
 //        values.put(User.Column.LAST_NAME, friend.getLastName());
 //        values.put(User.Column.TEL, friend.getTel());
 //        values.put(User.Column.EMAIL, friend.getEmail());

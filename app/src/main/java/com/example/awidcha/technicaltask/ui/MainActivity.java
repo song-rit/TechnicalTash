@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import com.example.awidcha.technicaltask.utils.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,39 +34,53 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        mHelper = new DBHelper(this);
+
+        clearDataBase();
+        initDataBase();
 
         infixView();
 
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "Hello World", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, FormActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        UserModel a = new UserModel();
-        a.setFullName("Songrit Maleerat");
+    }
 
-//
-//        userModels.add(a);
-//        userModels.add(a);
-//        userModels.add(a);
-        mHelper = new DBHelper(this);
-        mHelper.deleteAllUser();
-        mHelper.addUser(a);
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        displayListView();
+    }
+
+    private void displayListView() {
 
         userModels = new ArrayList<>(mHelper.getAllUser());
-
         ListViewUserAdapter adapter = new ListViewUserAdapter(this, userModels);
         mListView.setAdapter(adapter);
+    }
 
-        }
+    private void clearDataBase() {
+        mHelper.deleteAllUser();
+    }
+
+    private void initDataBase() {
+        UserModel user = new UserModel();
+        user.setFullName("Songrit Maleerat");
+        user.setNickName("Jame");
+        mHelper.addUser(user);
+    }
 
     private void infixView() {
         mButtonAdd = (ImageButton) mToolbar.findViewById(R.id.button_add);
         mListView = (ListView) findViewById(R.id.list_view);
+
     }
+
 }
