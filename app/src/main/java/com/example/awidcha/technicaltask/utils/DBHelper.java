@@ -119,4 +119,14 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
+    public void deleteAllUser() {
+
+        sqLiteDatabase = this.getWritableDatabase();
+
+//        sqLiteDatabase.delete(User.TABLE, User.Column.Employee_ID + " = " + id, null);
+        sqLiteDatabase.delete(User.TABLE, null , null);
+
+        sqLiteDatabase.close();
+    }
+
 }

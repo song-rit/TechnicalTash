@@ -1,5 +1,6 @@
 package com.example.awidcha.technicaltask.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -36,18 +37,22 @@ public class MainActivity extends AppCompatActivity {
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Hello World", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Hello World", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, FormActivity.class);
+                startActivity(intent);
             }
         });
 
 
         UserModel a = new UserModel();
         a.setFullName("Songrit Maleerat");
+
 //
 //        userModels.add(a);
 //        userModels.add(a);
 //        userModels.add(a);
         mHelper = new DBHelper(this);
+        mHelper.deleteAllUser();
         mHelper.addUser(a);
 
         userModels = new ArrayList<>(mHelper.getAllUser());
