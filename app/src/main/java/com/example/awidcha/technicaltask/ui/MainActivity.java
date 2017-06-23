@@ -1,5 +1,8 @@
 package com.example.awidcha.technicaltask.ui;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +20,7 @@ import com.example.awidcha.technicaltask.model.UserModel;
 import com.example.awidcha.technicaltask.utils.DBHelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -48,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
 
 
     }

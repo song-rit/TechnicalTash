@@ -24,6 +24,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.awidcha.technicaltask.ui.MainActivity" />
         </activity>
+
+        <activity android:name=".ui.NotificationActivity" />
+
+        <receiver android:name=".utils.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
