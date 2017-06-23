@@ -101,7 +101,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return userModels;
     }
 
-    public List<UserModel> getTest(){
+    public List<UserModel> getTest() {
         return new ArrayList<>();
     }
 
@@ -128,7 +128,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase = this.getWritableDatabase();
 
 //        sqLiteDatabase.delete(User.TABLE, User.Column.Employee_ID + " = " + id, null);
-        sqLiteDatabase.delete(User.TABLE, null , null);
+        sqLiteDatabase.delete(User.TABLE, null, null);
 
         sqLiteDatabase.close();
     }

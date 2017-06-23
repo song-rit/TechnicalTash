@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Awidcha on 23/6/2560.
  */
 
-public class ListViewUserAdapter extends BaseAdapter{
+public class ListViewUserAdapter extends BaseAdapter {
 
     List<UserModel> mUserModels;
     private LayoutInflater mInflater;

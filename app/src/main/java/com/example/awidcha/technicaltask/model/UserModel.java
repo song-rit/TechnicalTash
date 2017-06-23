@@ -21,7 +21,8 @@ public class UserModel {
     private String linkedInLink;
     private String currentLocation;
 
-    public UserModel(){}
+    public UserModel() {
+    }
 
     public UserModel(int id, String name, String nickName, String address, String phoneNumber, String photo, String qualification, String experience, String email, String dob, String anniversary, String facebook, String linkedInLink, String currentLocation) {
         this.id = id;

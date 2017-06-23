@@ -23,7 +23,6 @@ import com.example.awidcha.technicaltask.utils.DBHelper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -34,8 +33,8 @@ public class FormActivity extends AppCompatActivity {
     private EditText mEditTextAnniversary;
     private DBHelper mHelper;
 
-    private DatePicker datePicker;
-    private Calendar calendar;
+    private DatePicker mDatePicker;
+    private Calendar mCalendar;
     private int year, month, day;
 
 
@@ -51,12 +50,12 @@ public class FormActivity extends AppCompatActivity {
         infixView();
         addForm();
 
-        myAlarm();
+        myAlarmEdit();
 
 
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+        year = mCalendar.get(Calendar.YEAR);
+        month = mCalendar.get(Calendar.MONTH);
+        day = mCalendar.get(Calendar.DAY_OF_MONTH);
 
 //        mEditTextDOB.setText(String.valueOf(year) + " " + String.valueOf(month) + " " + String.valueOf(day));
         mEditTextDOB.setEnabled(true);
@@ -73,8 +72,6 @@ public class FormActivity extends AppCompatActivity {
                 showDialog(101);
             }
         });
-
-
     }
 
     private void infixView() {
@@ -83,7 +80,7 @@ public class FormActivity extends AppCompatActivity {
         mEditTextNickName = (EditText) findViewById(R.id.edit_text_nick_name);
         mEditTextAnniversary = (EditText) findViewById(R.id.edit_text_anniversary);
         mEditTextDOB = (EditText) findViewById(R.id.edit_text_dob);
-        calendar = Calendar.getInstance();
+        mCalendar = Calendar.getInstance();
     }
 
     @Override
@@ -160,8 +157,6 @@ public class FormActivity extends AppCompatActivity {
 
     }
 
- 
-
     private void setDate() {
         String dt = "2008-01-01";  // Start date
         dt = mEditTextDOB.getText().toString();
@@ -191,6 +186,38 @@ public class FormActivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.SECOND, 3);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+    }
+
+    private void myAlarmEdit() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
+        notificationIntent.addCategory("android.intent.category.DEFAULT");
+
+        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        String dt = "2017-06-23 06:53:20";  // Start date
+        dt = mEditTextDOB.getText().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("2017/06/23 06:53:00");
+        Calendar c = Calendar.getInstance();
+        try {
+
+            c.setTime(sdf.parse(dt));
+            c.add(Calendar.DATE, 1);  // number of days to add
+            dt = sdf.format(c.getTime());  // dt is now the new date
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(getApplicationContext(), String.valueOf(c.getTime()), Toast.LENGTH_SHORT).show();
+
+//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), broadcast);
+        AlarmManager.AlarmClockInfo info = new AlarmManager.AlarmClockInfo(c.getTimeInMillis(), broadcast);
+
+        alarmManager.setAlarmClock(info, broadcast);
+
     }
 
 }
